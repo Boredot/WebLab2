@@ -187,8 +187,52 @@ footer p {
 }
 
 @media (max-width: 600px) {
-    #task-form, #controls {
+    #task-form,
+    #controls {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+    #task-form button,
+    #controls button {
+        width: 100%;
+        max-width: 100px;
+        margin: 0;
+    }
+
+    .task-item {
         flex-direction: column;
+        align-items: stretch;
+    }
+
+    .task-info {
+        display: flex;
+        flex-wrap: wrap;
         align-items: center;
+        gap: 5px;
+        width: 100%;
+    }
+
+    .task-text {
+        flex-grow: 1;
+        order: 1;
+    }
+
+    .task-date {
+        order: 2;
+    }
+
+    .task-actions {
+        width: 100%;
+        justify-content: space-between;
+        margin-top: 5px;
+        order: 3;
+    }
+
+    .task-actions button {
+        flex: 1;
+        min-width: 40px;
+        padding: 4px 8px;
+        font-size: 12px;
     }
 }
