@@ -4,6 +4,8 @@ export function saveTasks() {
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
+let draggedIndex = null;
+
 export function renderTasks() {
     const taskList = document.getElementById('task-list');
     taskList.innerHTML = '';
@@ -65,6 +67,30 @@ export function renderTasks() {
         li.appendChild(taskActions);
 
         taskList.appendChild(li);
+    });
+
+        taskList.addEventListener('dragstart', (e) => {
+        if (e.target.tagName === 'LI') {
+            draggedIndex = Array.from(e.target.parentNode.children).indexOf(e.target);
+        }
+    });
+
+    taskList.addEventListener('dragover', (e) => {
+        e.preventDefault();
+    });
+
+    taskList.addEventListener('drop', (e) => {
+        e.preventDefault();
+        const dropIndex = Array.from(e.target.parentNode.children).indexOf(e.target.closest('li'));
+
+        if (draggedIndex !== null && dropIndex !== -1 && draggedIndex !== dropIndex) {
+            const movedTask = tasks.splice(draggedIndex, 1)[0];
+            tasks.splice(dropIndex, 0, movedTask);
+            saveTasks();
+            renderTasks();
+        }
+        draggedIndex = null;
+
     });
 }
 
