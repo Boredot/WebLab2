@@ -1,4 +1,5 @@
 import { addTask, deleteTask, toggleTask, editTask, renderTasks, getTasks, setTasks } from './tasks.js';
+import { openEditModal } from './modal.js';
 
 export function setupEventListeners() {
     document.getElementById('task-form').addEventListener('submit', (e) => {
@@ -27,13 +28,7 @@ export function setupEventListeners() {
         if (e.target.classList.contains('edit-btn')) {
             const tasks = getTasks();
             const task = tasks[index];
-            const newText = prompt('Input new task:', task.text);
-            if (newText !== null) {
-                const newDate = prompt('Input new date (YYYY-MM-DD):', task.date);
-                if (newDate !== null) {
-                    editTask(index, newText.trim(), newDate);
-                }
-            }
+            openEditModal(index, task);
         }
     });
 
