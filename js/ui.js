@@ -1,4 +1,5 @@
 import { createForm } from './dom.js';
+import { renderTasks } from './tasks.js';
 
 export function createAppUI() {
     const body = document.body;
@@ -65,4 +66,6 @@ export function createAppUI() {
     footer.appendChild(footerText2);
     footer.appendChild(footerText3);
     body.appendChild(footer);
+
+    renderTasks();
 }
